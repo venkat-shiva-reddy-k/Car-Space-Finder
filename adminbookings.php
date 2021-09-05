@@ -53,7 +53,62 @@
 
         <div class="row">
 
-          <p> Under Construction</p>
+            <table class="table table-stripped table-bordered">
+                <tr>
+                <td>BookingId</td>
+                <td>Email</td>
+                    <td>Car Number</td>
+                    <td>Price</td>
+                    <td>Date</td>
+                    <td>Time</td>
+                    <td>Hours</td>
+                    <td>Amount</td>
+                    <td>Status</td>
+                </tr>
+          
+
+            <?php
+            include 'config.php';
+            session_start();
+ 
+            $email=$_SESSION["email"];
+
+            $sql = "SELECT * FROM booking";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    echo "
+                    
+                    <tr>
+                    <td>" . $row["bid"]. "   </td>
+                    <td>" . $row["email"]. "   </td>
+                    <td>" . $row["carno"]. "   </td>
+                    <td>" . $row["price"]. "   </td>
+                    <td>" . $row["dat"]. "   </td>
+                    <td>" . $row["time"]. "   </td>
+                    <td>" . $row["hours"]. "   </td>
+                    <td>" . $row["amount"]. "   </td>
+                    <td>" . $row["status"]. "   
+                    
+                    <a href='reset.php?pid=" . $row["pid"]. "'><span class='glyphicon glyphicon-edit'></span></a>
+                    </td>
+
+                    </tr>
+                    ";
+                }
+            } else {
+                echo "No Records Found";
+            }
+            $conn->close();
+
+            ?>
+
+
+
+            </table>
+
 
         </div>
 
