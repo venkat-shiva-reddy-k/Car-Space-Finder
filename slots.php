@@ -126,6 +126,99 @@
                     </div>
                 </div>
             </div>
+            <table class="table table-stripped table-bordered">
+                <tr style="background-color:#337ab7;color:white">
+                    <td>Park Id</td>
+                    <td>Area Id</td>
+                    <td>Parking Slot</td>
+                    <td>Status</td>
+                    <td>Price</td>
+                    <td>Action</td>
+                </tr>
+
+
+                <?php
+                include 'config.php';
+
+
+                $sql = "SELECT * FROM parkingslots";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo '
+                    
+                    <tr>
+                        <td>' . $row["pid"] . '   </td> 
+                        <td>' . $row["aid"] . '   </td>
+                        <td>' . $row["parkslot"] . '   </td>
+                        <td>' . $row["status"] . '  </td>
+                        <td>' . $row["price"] . '   </td>
+                    <td> 
+                    
+                    <span data-toggle="modal" data-target="#' . $row["pid"] . '" class="glyphicon glyphicon-edit"></span>  
+                    <a href="deleteparkingslot.php?id= ' . $row["pid"] . '"> <span class="glyphicon glyphicon-trash"></span> </a>
+                    </td>
+                   
+                    </tr>
+
+
+
+                    <div class="modal fade" id="' . $row["pid"] . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="exampleModalLabel">Add Area</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+    
+                                <form method="post" action="editslot.php">
+
+                                <input type="text" class="form-control" name="pid" value="' . $row["pid"] . '" hidden>
+
+
+                                    <div class="form-group">
+                                        <label>Enter State</label>
+                                        <input type="text" class="form-control" name="parkslot" value="' . $row["parkslot"] . '" required>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label>Enter City</label>
+                                        <input type="text" class="form-control" name="status" value="' . $row["status"] . '"  required>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label>Enter Area</label>
+                                        <input type="text" class="form-control" name="price" value="' . $row["price"] . '"  required>
+                                    </div>
+                                    <button class="btn btn-success form-control">Add Area</button>
+                                </form>
+    
+    
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+
+
+                
+                    ';
+                    }
+                } else {
+                    echo "0 results";
+                }
+                $conn->close();
+
+                ?>
+
+
+
+            </table>
 
         </div>
 
