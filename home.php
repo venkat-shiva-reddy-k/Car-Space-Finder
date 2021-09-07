@@ -52,7 +52,46 @@
 
         <div class="row">
 
-          <p> Under Construction</p>
+          
+               <?php
+            include 'config.php';
+
+
+            $sql = "SELECT * FROM area";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+
+                    <div class="col-md-3 bg">
+
+                        <form method="POST" action="parkingslots.php?id=' . $row["aid"] . '">
+                            <p>
+                           ' . $row["state"] . '
+                            
+                            </p>
+                            <p>
+                          ' . $row["city"] . '
+                             </p>
+                              <p>
+                            ' . $row["area"] . '
+                            <br>
+                            <br>
+                             <button class="btn btn-success form-control" type="submit"> Check Slots </button> 
+                        </form>
+                    </div>
+                    
+                    ';
+                }
+            } else {
+                echo "0 results";
+            }
+            $conn->close();
+
+            ?>
+
 
 
 
