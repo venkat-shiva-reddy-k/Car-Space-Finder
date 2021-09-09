@@ -34,7 +34,58 @@
 
 
 <body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+<!--=============================
+=            Sign Up            =
+==============================-->
 
+<section class="user-login section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="block">
+					<!-- Image -->
+					<div class="image align-self-center"><img class="img-fluid" src="images/Login/sign-up.jpg" alt="desk-image">
+					</div>
+					<!-- Content -->
+					<div class="content text-center">
+						<div class="logo">
+							<a href="index.html"><img src="images/logo.png" alt=""></a>
+						</div>
+						<div class="title-text">
+							<h3>Sign Up for New Account</h3>
+						</div>
+					 <form method="POST" action="register.php">
+							<!-- Username -->
+							<input class="form-control main" type="text" placeholder="Name" name="fname" required>
+							<!-- Email -->
+							<input class="form-control main" type="email" placeholder="Email" name="email" required>
+								<!-- Phone -->
+							<input class="form-control main" type="number" placeholder="Phone" name="phone" required>
+							<!-- Password -->
+							<input class="form-control main" type="password" placeholder="Password" name="pass" required>
+					
+							<Select class="form-control main" name="qus">
+							    <option value="What is maiden name?">What is maiden name?</option>
+							      <option value="What is first school name?">What is first school name?</option>
+							      <option value="What is favorite car?">What is favorite car?</option>
+							</Select>
+								<!-- answer -->
+							<input class="form-control main" type="text" placeholder="Answer" name="answer" required>
+							<!-- Submit Button -->
+							<button class="btn btn-main-md" id="signu">sign up</button>
+						</form>
+						<div class="new-acount">
+						
+							<p>Anready have an account? <a href="sign-in.html">SIGN IN</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Sign Up  ====-->
 
 
   <!-- To Top -->
