@@ -11,7 +11,7 @@ VALUES ('$fname', '$email', '$phone', '$pass')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
-        header('Location:index.php');
+        header('Location:sign-in.html');
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

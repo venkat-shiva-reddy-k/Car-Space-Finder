@@ -102,8 +102,9 @@
             <?php
             include 'config.php';
 
+            $aid=$_GET['id'];
 
-            $sql = "SELECT * FROM area";
+            $sql = "SELECT * FROM parkingslots where aid='$aid'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -111,28 +112,32 @@
                 while ($row = $result->fetch_assoc()) {
                     echo '
 
-                    <div class="col-md-3 bg" ">
+                    <div class="col-md-3 bg">
 
-                        <form method="POST" action="parkingslots.php?id=' . $row["aid"] . '">
+                        <form method="POST" action="book.php?id=' . $row["pid"] . '&price=' .$row["price"]. ' ">
                             <p>
-                           ' . $row["state"] . '
+                           ' . $row["parkslot"] . '
                             
                             </p>
                             <p>
-                          ' . $row["city"] . '
+                          ' . $row["status"] . '
                              </p>
                               <p>
-                            ' . $row["area"] . '
+                            Rs.' . $row["price"] . '
                             <br>
                             <br>
-                             <button class="btn btn-success form-control" type="submit" style="width:50%;font-size:14px"> Check Slots </button> 
-                        </form>
-                    </div>
-                    
                     ';
+                    
+                  
+                        echo '<button class="btn btn-success form-control" type="submit"> Book </button>  </form>
+                        </div>'; 
+                    
+                    
+                    
+                    ;
                 }
             } else {
-                echo "0 results";
+                echo "No Parking Slots Available";
             }
             $conn->close();
 

@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
   header('Location:home.php');
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
-  header('Location:index.php');
+  header('Location:index.html');
 }
 $conn->close();
 ?>

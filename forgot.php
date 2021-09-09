@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,20 +30,6 @@
   <!-- CUSTOM CSS -->
   <link href="css/style.css" rel="stylesheet">
 
-<style>
-
-.col-md-3 {
-    -ms-flex: 0 0 25%;
-    flex: 0 0 25%;
-    max-width: 25%;
-    background-color: white;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 20px;
-}
-</style>
-
-
 </head>
 
 <body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
@@ -58,16 +45,19 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="home.php">Home</a>
+          <a class="nav-link" href="index.html">Home</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="mybookings.php">My Bookings</a>
+          <a class="nav-link" href="about.html">About</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="user_profile.php">Profile</a>
+          <a class="nav-link" href="sign-in.html">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="adminlogin.html">Admin</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="logout.php">Logout</a>
+          <a class="nav-link" href="contact.html">Contact</a>
         </li>
       </ul>
     </div>
@@ -96,57 +86,46 @@
 		<div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="100"></div>
 		<div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
 	</div>
-	<div class="container" style="background-color:white" >
-		 <div class="row" >
-
-            <?php
-            include 'config.php';
-
-
-            $sql = "SELECT * FROM area";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo '
-
-                    <div class="col-md-3 bg" ">
-
-                        <form method="POST" action="parkingslots.php?id=' . $row["aid"] . '">
-                            <p>
-                           ' . $row["state"] . '
-                            
-                            </p>
-                            <p>
-                          ' . $row["city"] . '
-                             </p>
-                              <p>
-                            ' . $row["area"] . '
-                            <br>
-                            <br>
-                             <button class="btn btn-success form-control" type="submit" style="width:50%;font-size:14px"> Check Slots </button> 
-                        </form>
-                    </div>
-                    
-                    ';
-                }
-            } else {
-                echo "0 results";
-            }
-            $conn->close();
-
-            ?>
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-6 order-2 order-md-1 text-center text-md-left">
+				<h1 class="text-white font-weight-bold mb-4">Car parking space finder</h1>
+				<p class="text-white mb-5">
+				     Your password Is : <?php
 
 
+include 'config.php';
+
+$uname = $_GET['email'];
+$answer = $_GET['answer'];
+
+$sql = "SELECT pass FROM user where email='$uname' and answer='$answer' ";
+$result = $conn->query($sql);
 
 
-
-        </div>
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo $row['pass']   ;
+  }
+} else {
+  echo "Invalid Details";
+}
+$conn->close();
+?>
+				    
+				     </p>
+				
+				
+				
+			</div>
+			<div class="col-md-6 text-center order-1 order-md-2">
+				<img class="img-fluid" src="images/mobile.png" alt="screenshot">
+			</div>
+		</div>
 	</div>
 </section>
 <!--====  End of Hero Section  ====-->
-
 
 
 <!--============================
