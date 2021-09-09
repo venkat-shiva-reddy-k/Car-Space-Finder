@@ -89,59 +89,144 @@
 
         <div class="row">
 
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addcity">+ Area</button>
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="addcity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel">Add Area</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form method="post" action="addarea.php">
+                                <div class="form-group">
+                                    <label>Enter State</label>
+                                    <input type="text" class="form-control" name="astate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Enter City</label>
+                                    <input type="text" class="form-control" name="acity" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Enter Area</label>
+                                    <input type="text" class="form-control" name="aplace" required>
+                                </div>
+                                <button class="btn btn-success form-control" id="addA">Add Area</button>
+                            </form>
+
+
+                        </div>
+                        <!-- <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
             <table class="table table-stripped table-bordered">
-                <tr>
-                <td>BookingId</td>
-                <td>Email</td>
-                    <td>Car Number</td>
-                    <td>Price</td>
-                    <td>Date</td>
-                    <td>Time</td>
-                    <td>Status</td>
+                <tr style="background-color:#337ab7;color:white">
+                    <td>Area Id</td>
+                    <td>State</td>
+                    <td>City</td>
+                    <td>Area</td>
+                    <td>Action</td>
                 </tr>
-          
 
-            <?php
-            include 'config.php';
-            session_start();
- 
-            $email=$_SESSION["email"];
 
-            $sql = "SELECT * FROM booking";
-            $result = $conn->query($sql);
+                <?php
+                include 'config.php';
 
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while ($row = $result->fetch_assoc()) {
-                    echo "
+
+                $sql = "SELECT * FROM area";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo '
                     
                     <tr>
-                    <td>" . $row["bid"]. "   </td>
-                    <td>" . $row["email"]. "   </td>
-                    <td>" . $row["carno"]. "   </td>
-                    <td>" . $row["price"]. "   </td>
-                    <td>" . $row["dat"]. "   </td>
-                    <td>" . $row["time"]. "   </td>
-                   
-                    <td>" . $row["status"]. "   
-                    
-                   
+                    <td>' . $row["aid"] . '   </td>
+                    <td>' . $row["state"] . '   </td>
+                    <td>' . $row["city"] . '   </td>
+                    <td>' . $row["area"] . '   </td>
+                    <td>   
+                      <span data-toggle="modal" data-target="#' . $row["aid"] . '" class="glyphicon glyphicon-edit"></span>  
+                   <a href="deletearea.php?id= ' . $row["aid"] . '"> <span class="glyphicon glyphicon-trash"></span> </a>
                     </td>
-
+                   
                     </tr>
-                    ";
+
+
+                    <div class="modal fade" id="' . $row["aid"] . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="exampleModalLabel">Add Area</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+    
+                                <form method="post" action="editarea.php">
+
+                                <input type="text" class="form-control" name="aid" value="' . $row["aid"] . '" hidden>
+
+
+                                    <div class="form-group">
+                                        <label>Enter State</label>
+                                        <input type="text" class="form-control" name="estate" value="' . $row["state"] . '" required>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label>Enter City</label>
+                                        <input type="text" class="form-control" name="ecity" value="' . $row["city"] . '"  required>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label>Enter Area</label>
+                                        <input type="text" class="form-control" name="earea" value="' . $row["area"] . '"  required>
+                                    </div>
+                                    <button class="btn btn-success form-control" id="eaddA">Add Area</button>
+                                </form>
+    
+    
+                            </div>
+                            <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                
+                    ';
+                    }
+                } else {
+                    echo "0 results";
                 }
-            } else {
-                echo "No Records Found";
-            }
-            $conn->close();
-
-            ?>
+                $conn->close();
 
 
 
-</table>
 
+                ?>
+
+
+
+            </table>
         </div>
 
 
