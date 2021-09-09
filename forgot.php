@@ -90,7 +90,31 @@
 		<div class="row align-items-center">
 			<div class="col-md-6 order-2 order-md-1 text-center text-md-left">
 				<h1 class="text-white font-weight-bold mb-4">Car parking space finder</h1>
+				<p class="text-white mb-5">
+				     Your password Is : <?php
 
+
+include 'config.php';
+
+$uname = $_GET['email'];
+$answer = $_GET['answer'];
+
+$sql = "SELECT pass FROM user where email='$uname' and answer='$answer' ";
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo $row['pass']   ;
+  }
+} else {
+  echo "Invalid Details";
+}
+$conn->close();
+?>
+				    
+				     </p>
 				
 				
 				
