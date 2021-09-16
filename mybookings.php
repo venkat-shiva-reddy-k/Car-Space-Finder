@@ -79,6 +79,8 @@
 
             <table class="table table-stripped table-bordered">
                 <tr>
+                    <td>Transaction ID</td>
+                    <td>Parking Slot</td>
                     <td>Car Number</td>
                     <td>Price</td>
                     <td>Date</td>
@@ -93,7 +95,7 @@
  
             $email=$_SESSION["email"];
 
-            $sql = "SELECT * FROM booking where email='$email'";
+            $sql = "SELECT booking.id,booking.bid,booking.email,booking.carno,booking.price,booking.dat,booking.time,booking.status,parkingslots.pid,parkingslots.parkslot FROM `booking` join parkingslots on booking.pid=parkingslots.pid where email='$email'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -102,25 +104,22 @@
                     echo "
                     
                     <tr>
+                     <td>" . $row["id"]. "   </td>
+                    <td>" . $row["parkslot"]. "   </td>
                     <td>" . $row["carno"]. "   </td>
                     <td>" . $row["price"]. "   </td>
                     <td>" . $row["dat"]. "   </td>
                     <td>" . $row["time"]. "   </td>
                     <td>" . $row["status"]. "   </td>
+                     <td> 
+                     
+                   <a href='cancel.php?id=" . $row["bid"]. "'><button class='btn btn-success'  > Cancel </button> </a> 
+                     
+                     </td>
                     </tr>
                     ";
                     
-                    
-                    //  if($row["status"] == "Booked")
-                    // {
-                    //  echo '<button class="btn btn-success form-control" type="submit" disabled> ' . $row["status"] . ' </button>  
-                    //  </div>'; 
-                     
-                    // }
-                    // else{
-                    //     echo '<button class="btn btn-success form-control" type="submit"> ' . $row["status"] . ' </button> 
-                    //     </div>'; 
-                    // }
+                   
                 }
             } else {
                 echo "No Records Found";
