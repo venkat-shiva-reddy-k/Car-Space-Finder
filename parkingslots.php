@@ -114,7 +114,7 @@
 
                     <div class="col-md-3 bg">
 
-                        <form method="POST" action="book.php?id=' . $row["pid"] . '&price=' .$row["price"]. ' ">
+                        <form method="POST" action="test.php?id=' . $row["pid"] . '&price=' .$row["price"]. ' ">
                             <p>
                            ' . $row["parkslot"] . '
                             
@@ -123,7 +123,7 @@
                           ' . $row["status"] . '
                              </p>
                               <p>
-                            Rs.' . $row["price"] . '
+                            CAD $' . $row["price"] . '
                             <br>
                             <br>
                     ';

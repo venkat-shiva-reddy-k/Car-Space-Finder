@@ -93,6 +93,7 @@
                 <tr>
                 <td>BookingId</td>
                 <td>Email</td>
+                <td>Parking Slot</td>
                     <td>Car Number</td>
                     <td>Price</td>
                     <td>Date</td>
@@ -107,7 +108,7 @@
  
             $email=$_SESSION["email"];
 
-            $sql = "SELECT * FROM booking";
+            $sql = "SELECT booking.bid,booking.email,booking.carno,booking.price,booking.dat,booking.time,booking.status,parkingslots.parkslot FROM `booking` join parkingslots on booking.pid=parkingslots.pid";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -118,6 +119,7 @@
                     <tr>
                     <td>" . $row["bid"]. "   </td>
                     <td>" . $row["email"]. "   </td>
+                    <td>" . $row["parkslot"]. "   </td>
                     <td>" . $row["carno"]. "   </td>
                     <td>" . $row["price"]. "   </td>
                     <td>" . $row["dat"]. "   </td>

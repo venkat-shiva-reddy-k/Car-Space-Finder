@@ -66,13 +66,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-       <li class="nav-item ">
+       <li class="nav-item active">
                     <a class="nav-link" href="adminhome.php">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a class="nav-link" href="slots.php">Parking Slots</a>
                 </li>
-                <li class="nav-item  active">
+                <li class="nav-item  ">
                     <a class="nav-link" href="adminbookings.php">Bookings</a>
                 </li>
 
@@ -85,9 +85,10 @@
   </div>
 </nav>
 
-    <div class="container">
+    <div class="container" style="margin-top:50px">
 
         <div class="row">
+
 
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addcity">+ Area</button>
 
@@ -172,7 +173,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h3 class="modal-title" id="exampleModalLabel">Add Area</h3>
+                                <h3 class="modal-title" id="exampleModalLabel">Edit Area</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -198,7 +199,7 @@
                                         <label>Enter Area</label>
                                         <input type="text" class="form-control" name="earea" value="' . $row["area"] . '"  required>
                                     </div>
-                                    <button class="btn btn-success form-control" id="eaddA">Add Area</button>
+                                    <button class="btn btn-success form-control" id="areae">Update Area</button>
                                 </form>
     
     
@@ -227,6 +228,7 @@
 
 
             </table>
+
         </div>
 
 

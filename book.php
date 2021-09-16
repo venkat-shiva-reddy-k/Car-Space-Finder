@@ -51,7 +51,17 @@ session_start();
     padding: 20px;
     border-radius: 20px;
 }
+
+
+
 </style>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 
 </head>
@@ -139,12 +149,60 @@ session_start();
 
                     <div class="form-group">
                         <label style="color:white">Car Number</label>
-                        <input type="text" class="form-control" name="carno" required>
+                        <!--<input type="text" class="form-control" name="carno" required>-->
+                        
+                        <select class="form-control" name="carno">
+                            <?php
+                            
+                             include 'config.php';
+                session_start();
+
+                $email = $_SESSION["email"];
+
+                $sql = "SELECT * FROM car where email='$email'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        echo '
+                    
+                  
+                  
+                    <option>' . $row["carno"] . '   </option>
+                   
+                
+                
+                    ';
+                    }
+                } else {
+                    echo "No Cars Found please add car";
+                }
+                $conn->close();
+
+
+                            
+                            ?>
+                        </select>
+                        
+                        
+                        
+                        
+                        
                     </div>
 
                     <div class="form-group">
                         <label style="color:white">Date</label>
-                        <input id="txtDate" type="date" class="form-control" name="date" required>
+                        <input id="txtDate" type="date" class="form-control" name="txtDate" required>
+                        <!--<div class='input-group date' id='date' name="date">-->
+                        <!--        <input type='text' class="form-control" />-->
+                        <!--        <span class="input-group-addon">-->
+                        <!--            <span class="glyphicon glyphicon-calendar"></span>-->
+                        <!--         </span>-->
+                        <!-- </div>-->
+                        
+                        
+                        
                     </div>
 
                     <div class="form-group">
@@ -169,11 +227,6 @@ session_start();
                         </select>
                     </div>
 
-                    <!--<div class="form-group">-->
-                    <!--    <label>Hours</label>-->
-                    <!--    <input type="text" class="form-control amount" name="hrs" onkeyup="onkeyupsum()" required>-->
-                    <!--</div>-->
-
                     <div class="form-group">
                         <label style="color:white">Price</label>
                         <input type="text" class="form-control amount" name="price"  value="<?php echo $_GET['price'] ?>" readonly required>
@@ -182,6 +235,9 @@ session_start();
                   
 
                     <button class="btn btn-success form-control" type="submit">book </button>
+                    
+                    
+                    
                 </form>
 
             </div>
@@ -194,6 +250,12 @@ session_start();
 
 
     </div>
+    
+    <script>
+function myFunction() {
+  
+}
+</script>
 
     <script>
         // multiplicatiion function_______________________________________________________________________
@@ -210,8 +272,16 @@ session_start();
 
 
         // Date Function ___________________________________________________________________________________
+        
+        
+          $(function () {
+        $('#date').datetimepicker({
+            minDate:new Date()
+        });
+    });
 
         $(function() {
+        
             var dtToday = new Date();
 
             var month = dtToday.getMonth() + 1;

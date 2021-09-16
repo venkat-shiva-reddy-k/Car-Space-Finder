@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,9 +89,9 @@
 		<div class="row align-items-center">
 			<div class="col-md-6 order-2 order-md-1 text-center text-md-left">
 				<h1 class="text-white font-weight-bold mb-4">Car parking space finder</h1>
-				<p class="text-white mb-5">
+				<p class="text-white mb-5" id="passmsg">
 				     Your password Is : <?php
-
+// session_start();
 
 include 'config.php';
 
