@@ -50,3 +50,23 @@ $customer = new Customer();
 
 // Add Customer To DB
 $customer->addCustomer($customerData);
+
+
+// Transaction Data
+$transactionData = [
+  'id' => $charge->id,
+  'customer_id' => $charge->customer,
+  'product' => $pid,
+  'amount' => $price,
+  'currency' => "CAD",
+  'status' => $charge->status,
+];
+
+// Instantiate Transaction
+$transaction = new Transaction();
+
+// Add Transaction To DB
+$transaction->addTransaction($transactionData);
+
+// Redirect to success
+header('Location: success.php?tid='.$charge->id.'&product='.$charge->description);
