@@ -1,4 +1,5 @@
 <?php
+include 'config.php';
   require_once('vendor/autoload.php');
   require_once('config/db.php');
   require_once('lib/pdo_db.php');
@@ -19,6 +20,11 @@
  $status = "Booked";
  $token = $POST['stripeToken'];
 
+ $query = "SELECT * from booking where pid='$pid' and dat='$dat' and time='$time' ";
+ $result = mysqli_query($conn,$query);
+ $row = mysqli_fetch_array($result);
+ if(!$row)
+ {
 // Create Customer In Stripe
 $customer = \Stripe\Customer::create(array(
   "email" => $uemail,
@@ -67,6 +73,13 @@ $transaction = new Transaction();
 
 // Add Transaction To DB
 $transaction->addTransaction($transactionData);
-
+// echo "<script>alert('Successfully Booked');</script>";
 // Redirect to success
 header('Location: success.php?tid='.$charge->id.'&product='.$charge->description);
+
+
+}else{
+
+echo "<script>alert('Slot in not available Booking Unsuccessful');document.location='home.php'</script>";
+}
+?>
